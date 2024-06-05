@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    <div class="contact-card">
+        <h2>Admin Login</h2>
+        <form action="admin_login.php" method="post">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+</body>
+</html>
+
+<?php
+session_start();
+
+$admin_user = 'admin'; // Change this to your admin username
+$admin_pass = 'password'; // Change this to your admin password
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    if ($username == $admin_user && $password == $admin_pass) {
+        $_SESSION['loggedin'] = true;
+        header("Location: admin_panel.php");
+    } else {
+        echo "Incorrect username or password";
+    }
+}
+?>
